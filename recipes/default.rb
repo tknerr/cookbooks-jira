@@ -69,7 +69,9 @@ unless FileTest.exists?(node[:jira][:install_path])
     end
   
     bash "untar-mysql-connector" do
-      code "(cd /tmp; tar zxvf /tmp/mysql-connector.tar.gz)"
+      # fix for CHEF-3140
+      unzip = Chef::VERSION != '0.10.10' ? 'z' : ''
+      code "(cd /tmp; tar #{unzip ? 'z' : ''}xvf /tmp/mysql-connector.tar.gz)"
     end
   
     bash "install-mysql-connector" do
