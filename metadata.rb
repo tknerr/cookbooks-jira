@@ -3,17 +3,18 @@ maintainer_email  "cookbooks@opscode.com"
 license           "Apache 2.0"
 description       "Installs and configures jira"
 version           "0.8.2"
+name              "jira"
 
 recipe "jira", "Installs and configures Jira"
-depends "mysql", ">= 1.0.5"
 
 %w{ ubuntu debian }.each do |os|
   supports os
 end
 
-%w{ runit java apache2 }.each do |cb|
-  depends cb
-end
+depends "mysql", "~> 1.0.5"
+depends "runit", "~> 0.15.0"
+depends "java", "~> 1.5.0"
+depends "apache2", "~> 1.1.10"
 
 attribute "jira",
   :display_name => "Jira",

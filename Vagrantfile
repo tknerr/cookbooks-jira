@@ -4,6 +4,7 @@
 Vagrant::Config.run do |config|
 
   config.vm.box = "ubuntu-12.04-server-amd64-vagrant"
+  # config.vm.box_url = "http://dl.dropbox.com/u/13494216/ubuntu-12.04-server-amd64-vagrant.box"
   config.vm.box_url = "W:\\boxes\\ubuntu-12.04-server-amd64-vagrant.box"
 
   config.vm.customize ["modifyvm", :id, "--memory", "2048"]
@@ -14,10 +15,11 @@ Vagrant::Config.run do |config|
   config.vm.host_name = "camp-jira"
   
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ".."
-    #chef.data_bags_path = "..\\..\\my-chef-repo\\data_bags"
+    chef.cookbooks_path = [ "./cookbooks", ".." ]
+    
     chef.add_recipe "vagrant-ohai"
     chef.add_recipe "jira"
+    
     chef.json = {
       :jira => {
         :database_user => 'jira',

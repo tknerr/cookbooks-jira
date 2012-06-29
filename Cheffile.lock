@@ -1,0 +1,30 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apache2 (1.1.10)
+    mysql (1.0.8)
+      openssl (>= 0.0.0)
+    openssl (1.0.0)
+    runit (0.15.0)
+
+GIT
+  remote: https://github.com/tknerr/cookbooks-java
+  ref: master
+  sha: 9d9dd1d05645632c5dc3c8f17d77abe01facd810
+  specs:
+    java (1.5.1)
+
+GIT
+  remote: https://github.com/tknerr/cookbooks-vagrant-ohai
+  ref: master
+  sha: 7c8cc0475a1ac74f4c2b683a7627c086dd36429d
+  specs:
+    vagrant-ohai (1.0.0)
+
+DEPENDENCIES
+  apache2 (~> 1.1.10)
+  java (~> 1.5.1)
+  mysql (~> 1.0.5)
+  runit (~> 0.15.0)
+  vagrant-ohai (~> 1.0.0)
+
