@@ -46,7 +46,9 @@ unless FileTest.exists?(node[:jira][:install_path])
   end
   
   bash "untar-jira" do
-    code "(cd /tmp; tar zxvf /tmp/jira.tar.gz)"
+    # fix for CHEF-3140
+    unzip = Chef::VERSION != '0.10.10'
+    code "(cd /tmp; tar #{unzip ? 'z' : ''}xvf /tmp/jira.tar.gz)"
   end
   
   bash "install-jira" do
@@ -70,7 +72,7 @@ unless FileTest.exists?(node[:jira][:install_path])
   
     bash "untar-mysql-connector" do
       # fix for CHEF-3140
-      unzip = Chef::VERSION != '0.10.10' ? 'z' : ''
+      unzip = Chef::VERSION != '0.10.10'
       code "(cd /tmp; tar #{unzip ? 'z' : ''}xvf /tmp/mysql-connector.tar.gz)"
     end
   
